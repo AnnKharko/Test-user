@@ -15,7 +15,7 @@ module.exports = {
         return { user, activate_token };
     },
     deleteOne: async (id, authId) => {
-        await User.findByIdAndDelete({ _id: id });
+        await User.findByIdAndUpdate(id, { status: STATUS_ENUM.DELETED });
         await O_Auth.findByIdAndDelete({ _id: authId });
     },
     activateOne: async (id, tokenId) => {
@@ -34,5 +34,12 @@ module.exports = {
     },
     resetPass: async (userId, newPassword) => {
         await User.findByIdAndUpdate(userId, { password: newPassword });
+    },
+    updateOne: async (userId, updateObject) => {
+        // await User.updateOne({ _id: userId }, { $set: updateObject });
+        await User.findByIdAndUpdate(userId, { $set: updateObject });
+    },
+    changeAvatar: async () => { // todo service
+
     }
 };

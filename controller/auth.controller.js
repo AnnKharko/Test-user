@@ -7,7 +7,6 @@ module.exports = {
             const { email, password } = req.body;
             const tokens = await authService.authUser(email, password);
 
-
             res.json(tokens);
         } catch (e) {
             next(e);

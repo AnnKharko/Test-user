@@ -63,8 +63,24 @@ module.exports = {
             }
 
             [req.avatar] = req.photos;
-            // req.avatar = req.photos[0];
 
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
+    checkChangeAvatar: (req, res, next) => {
+        try {
+            const { avatar } = req.files;
+
+            if (PHOTOS_MIMETYPES.includes(avatar.mimetype)) {
+                if (PHOTO_MAX_SIZE < avatar.size) {
+                    throw new ErrorHandler(errorCodesEnum.PAYLOAD_TOO_LARGE, errorCustomCodes.FILE_TOO_LARGE);
+                }
+            }
+            // console.log(avatar);
+
+            [req.avatar] = req.files;
             next();
         } catch (e) {
             next(e);

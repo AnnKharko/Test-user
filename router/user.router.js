@@ -20,10 +20,6 @@ router.post('/password/forgot',
     validatorMiddleware.emailValidate,
     userMiddleware.checkIsUserExists,
     userController.forgotPassword);
-// router.post('/password/reset',
-//     authMiddleware.checkResetPasswordToken,
-//     validatorMiddleware.passwordValidate,
-//     realtorController.resetPassword);
 router.patch('/password/forgot',
     authMiddleware.checkResetPasswordToken,
     validatorMiddleware.passwordValidate,
@@ -32,8 +28,21 @@ router.post('/password/reset',
     authMiddleware.checkAccessToken,
     validatorMiddleware.resetPasswordValidate,
     userController.resetPassword);
-// router.use('/:id', realtorMiddleware.checkIsIdValid); // сприймає усі інші endpoint як id !!!
 router.get('/:id', userMiddleware.checkIsIdValid, userController.getUser);
-router.delete('/:id', authMiddleware.checkAccessToken, userController.deleteUser);
+router.delete('/:id',
+    userMiddleware.checkIsIdValid,
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkRole([constant.ROLE_ENUM.ADMIN]),
+    userController.deleteUser);
+router.put('/:id',
+    userMiddleware.checkIsIdValid,
+    authMiddleware.checkAccessToken,
+    userMiddleware.checkIsUpdateUserValid,
+    userController.updateUser);
+router.patch('/:id',
+    userMiddleware.checkIsIdValid,
+    authMiddleware.checkAccessToken,
+    uploadMiddleware.checkChangeAvatar,
+    userController.changeAvatar);
 
 module.exports = router;

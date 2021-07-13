@@ -1,6 +1,6 @@
 const { ErrorHandler, errorCodesEnum, errorCustomCodes } = require('../error');
 const { User } = require('../dataBase/models');
-const { userValidator } = require('../validator');
+const { someFieldValidator, userValidator } = require('../validator');
 const { userService } = require('../service');
 const { STATUS_ENUM } = require('../constant/constant');
 
@@ -18,7 +18,7 @@ module.exports = {
             next(e);
         }
     },
-    checkIsIdValid: async (req, res, next) => {
+    checkIsIdValid: async (req, res, next) => { // todo
         try {
             const { id } = req.params;
             const user = await User.findById({ _id: id });
@@ -52,7 +52,7 @@ module.exports = {
             const { email } = req.body;
             const user = await userService.findOneByParams({ email });
 
-            if (!user) {
+            if (!user || user.status === STATUS_ENUM.DELETED) {
                 return next(new ErrorHandler(errorCodesEnum.BAD_REQUEST, errorCustomCodes.USER_NOT_FOUND));
             }
 
@@ -74,5 +74,18 @@ module.exports = {
         } catch (e) {
             next(e);
         }
-    }
+    },
+    checkIsUpdateUserValid: async (req, res, next) => {
+        try {
+            const { error } = await someFieldValidator.updateUserValidator.validate(req.body);
+
+            if (error) {
+                throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, errorCustomCodes.BAD_REQUEST, error.details[0].message);
+            }
+
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
 };
