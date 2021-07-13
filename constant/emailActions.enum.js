@@ -1,0 +1,7 @@
+module.exports = {
+    WELCOME: 2,
+    USER_DELETED: 3,
+    ACTIVATE: 1,
+    RESET_PASSWORD: 4,
+    SUCCESSFULLY_RESET_PASSWORD: 5
+};

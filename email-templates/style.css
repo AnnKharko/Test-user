@@ -1,0 +1,19 @@
+.footer {
+    background-color: darkcyan;
+    color: lightgrey;
+}
+.header {
+    background-color: lightgrey;
+    color: black;
+}
+a {
+    text-decoration: none;
+    color: blue;
+    font-size: 20px;
+}
+p {
+    font-size: 20px;
+}
+span{
+    font-size: 20px;
+}
