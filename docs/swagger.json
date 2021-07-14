@@ -194,7 +194,551 @@
           }
         }
       }
+    },
+    "/users/activate": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Activate user",
+        "operationId": "activateUser",
+        "parameters":[
+          {
+            "name": "activate_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activate user success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": "201"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "USER IS ACTIVATED"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/password/forgot": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Forgot password",
+        "operationId": "forgotPassword",
+        "parameters":[
+          {
+            "name": "email",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "someEmail.example1@gmail.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "sent a letter with reset_password_token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": "201"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Check your inbox to complete the reset password."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Reset forgot password",
+        "operationId": "resetForgotPassword",
+        "parameters": [
+          {
+            "name": "reset_password_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "bdflSKJBFD447dG"
+          },
+          {
+            "name": "repeat_password",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "bdflSKJBFD447dG"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "password successfully reset "
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/password/reset": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Reset password",
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "bdflSKJBFD447dG"
+          },
+          {
+            "name": "newPassword",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "bFLJHHkhg47dG3943T"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "password successfully reset"
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/:id": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Delete user",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "type": "string",
+            "example": "60c8dd888ebfc910896528eb"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete user success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": "201"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "USER IS DELETED"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Update user",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "type": "string",
+            "example": "60c8dd888ebfc910896528eb"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "Anna"
+          },
+          {
+            "name": "yearOfBorn",
+            "in": "formData",
+            "required": false,
+            "type": "number",
+            "example": 1992
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "email@expamle.com"
+          },
+          {
+            "name": "gender",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "female"
+          },
+          {
+            "name": "phone",
+            "in": "formData",
+            "required": false,
+            "type": "number",
+            "example": "38 096 000 00 00"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update user success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": "201"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "USER IS UPDATED"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Change avatar",
+        "operationId": "changeAvatar",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "type": "string",
+            "example": "60c8dd888ebfc910896528eb"
+          },
+          {
+            "name": "avatar",
+            "in": "formData",
+            "required": true,
+            "type": "file",
+            "example": "lake-5657887_1280.jpg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change avatar success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": "201"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Avatar successfully changed"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
+    },
 
+    "/auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Create authorization tokens",
+        "operationId": "createAuthTokens",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "someEmail.example1@gmail.com"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "bdflSKJBFD447dG"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auth tokens is created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "sting",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjQzNTU5MTgsImV4cCI6MTYyNDM1NjUxOH0.7R52L13Hc9yimmS1miDspqG7b4kDvMXLLESyskC2oFA"
+                },
+                "refresh_token": {
+                  "type": "sting",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjQzNTU5MTgsImV4cCI6MTYyNjk0NzkxOH0.mro02twpZUH_vYFLchtI8SQ_U6AmP4Iyoku2gxIT2ew"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Create new authorization tokens",
+        "operationId": "createNewAuthTokens",
+        "parameters":[
+          {
+            "name": "refresh_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auth tokens is created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "sting",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjQzNTU5MTgsImV4cCI6MTYyNDM1NjUxOH0.7R52L13Hc9yimmS1miDspqG7b4kDvMXLLESyskC2oFA"
+                },
+                "refresh_token": {
+                  "type": "sting",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjQzNTU5MTgsImV4cCI6MTYyNjk0NzkxOH0.mro02twpZUH_vYFLchtI8SQ_U6AmP4Iyoku2gxIT2ew"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Logout",
+        "operationId": "logout",
+        "parameters":[
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Realtor successfully logout"
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
     }
+
   }
 }

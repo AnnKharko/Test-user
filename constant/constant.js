@@ -8,7 +8,7 @@ module.exports = {
     UNKNOWN_FILE: 'UNKNOWN FILE',
     NO_REPLY: 'no-reply@codemoto.io',
     CHECK_EMAIL: 'Check your inbox to activate your account.',
-    CHECK_EMAIL_TO_COMPLETE: 'Check your inbox to complete the reset password .',
+    CHECK_EMAIL_TO_COMPLETE: 'Check your inbox to complete the reset password.',
     PASSWORD_SUCCESSFULLY_CHANGED: 'Password successfully changed',
     AVATAR_SUCCESSFULLY_CHANGED: 'Avatar successfully changed',
 
