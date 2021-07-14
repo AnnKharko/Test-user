@@ -2,7 +2,7 @@ const cors = require('cors');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -15,8 +15,6 @@ const {
 } = require('./config/config');
 const Sentry = require('./logger/sentry');
 const swaggerDoc = require('./docs/swagger.json');
-
-dotenv.config();
 
 const app = express();
 
