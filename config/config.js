@@ -12,6 +12,13 @@ module.exports = {
     PORT: 5000,
     ROOT_EMAIL: process.env.ROOT_EMAIL || '',
     ROOT_EMAIL_PASSWORD: process.env.ROOT_EMAIL_PASSWORD || '',
-    ROOT_EMAIL_SERVICE: process.env.ROOT_EMAIL_SERVICE || '',
+    ROOT_EMAIL_SERVICE: process.env.ROOT_EMAIL_SERVICE || 'gmail',
     FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5000',
+    ALLOWED_ORIGIN: process.env.ALLOWED_ORIGIN || 'http://localhost:4200;http://localhost:3000',
+    SENTRY_DSN: process.env.SENTRY_DSN || '',
+
+    serverRateLimits: {
+        period: 15 * 60 * 1000, // 15 minutes
+        maxRequests: 1000
+    }
 };
