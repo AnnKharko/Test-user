@@ -9,6 +9,7 @@
   "author": "Anna Kharko",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^6.9.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dayjs": "^1.10.6",

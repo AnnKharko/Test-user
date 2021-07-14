@@ -38,8 +38,5 @@ module.exports = {
     updateOne: async (userId, updateObject) => {
         // await User.updateOne({ _id: userId }, { $set: updateObject });
         await User.findByIdAndUpdate(userId, { $set: updateObject });
-    },
-    changeAvatar: async () => { // todo service
-
     }
 };

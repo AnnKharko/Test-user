@@ -18,7 +18,7 @@ module.exports = {
             next(e);
         }
     },
-    checkIsIdValid: async (req, res, next) => { // todo
+    checkIsIdValid: async (req, res, next) => {
         try {
             const { id } = req.params;
             const user = await User.findById({ _id: id });

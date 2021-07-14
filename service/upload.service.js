@@ -5,7 +5,6 @@ const { User } = require('../dataBase/models');
 
 const userUploadDirBuilder = async (uploadFile, itemId, uploadType) => {
     const { filePath, fileDir, uploadPath } = uploadFileDirBuilder('user', uploadFile.name, uploadType, itemId);
-
     await fs.mkdir(fileDir, { recursive: true });
 
     await uploadFile.mv(filePath);

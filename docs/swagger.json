@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "test task Node",
+    "description": "Swagger documentation (c) Ann Kharko"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get all users",
+        "operationId": "getAllUsers",
+        "responses": {
+          "200": {
+            "description": "All users success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "60bcde5be151d0debbdfcdef"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Anna"
+                },
+                "yearOfBorn": {
+                  "type": "number",
+                  "example": "1992"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "female"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "someEmail.2021@gmail.com"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "confirmed"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "realtor"
+                },
+                "phone": {
+                  "type": "number",
+                  "example": "38 096 000 00 00"
+                },
+                "avatar": {
+                  "type": "string",
+                  "example": "realtor/60b239c7e24485a39b7d3e39/photo/28bd9450-c07d-11eb-84c0-af9769d570fb.jpg"
+                },
+                "doc": {
+                  "type": "array",
+                  "example": [
+                    "realtor/60b239c7e24485a39b7d3e39/doc/28c02c60-c07d-11eb-84c0-af9769d570fb.doc",
+                    "realtor/60b239c7e24485a39b7d3e39/doc/28c20120-c07d-11eb-84c0-af9769d570fb.pdf"
+                  ]
+                },
+                "video": {
+                  "type": "array",
+                  "example": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create user",
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "Anna"
+          },
+          {
+            "name": "yearOfBorn",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "example": 1992
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "email@expamle.com"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "vklglig$gutlfiugiyf"
+          },
+          {
+            "name": "repeat_password",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "vklglig$gutlfiugiyf"
+          },
+          {
+            "name": "gender",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "female"
+          },
+          {
+            "name": "phone",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "example": "38 096 000 00 00"
+          },
+          {
+            "name": "avatar",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "example": "lake-5657887_1280.jpg"
+          },
+          {
+            "name": "doc",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "example": "Katelyn johnson.pdf"
+          },
+          {
+            "name": "video",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create user success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": "201"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "USER IS CREATED"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

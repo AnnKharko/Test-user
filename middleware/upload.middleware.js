@@ -78,9 +78,8 @@ module.exports = {
                     throw new ErrorHandler(errorCodesEnum.PAYLOAD_TOO_LARGE, errorCustomCodes.FILE_TOO_LARGE);
                 }
             }
-            // console.log(avatar);
 
-            [req.avatar] = req.files;
+            req.avatar = avatar;
             next();
         } catch (e) {
             next(e);

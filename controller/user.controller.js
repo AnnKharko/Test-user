@@ -41,10 +41,6 @@ module.exports = {
                 await uploadService.userUploadDirBuilder(avatar, user._id, 'photo');
             }
 
-            // ''''''''''''''''''''''''''''''''''
-            // await addFileToDB('realtor', realtor, avatar, docs, videos); // TODO additional function for updating db
-            // ''''''''''''''''''''''''''''''''''
-
             if (docs) {
                 for (const doc of docs) {
                     // eslint-disable-next-line no-await-in-loop
@@ -157,14 +153,10 @@ module.exports = {
     },
     changeAvatar: async (req, res, next) => {
         try {
-            const { avatar, userInfo } = req; // todo changeAVATAR
-            // console.log(avatar);
-            // console.log('+++++++++++++++++++');
-            // console.log(userInfo);
+            const { avatar, userInfo } = req;
 
-            await userService.changeAvatar(avatar);
+            await uploadService.userUploadDirBuilder(avatar, userInfo._id, 'photo');
             await logService.createLog({ event: constant.LOG_ENUM.CHANGE_AVATAR, userId: userInfo._id });
-
             res.status(statusCodesEnum.OK).json(constant.AVATAR_SUCCESSFULLY_CHANGED);
         } catch (e) {
             next(e);
